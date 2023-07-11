@@ -1,0 +1,38 @@
+function autoDateImport() {
+
+  
+
+  // var ss = SpreadsheetApp.openById("1mseb7gczg6hAIJHpWF8mKTo6ace0J3gF9lGFYOLDCfg");
+  // var targetSheet = ss.getActiveSheet();
+  // var komoda =targetSheet;
+  var komoda = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("KOMODAA");
+  var komodaCode = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("KOMODAA").getRange("B:B");
+
+
+ 
+  var autoDateImport = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("AutoDateImport.ps");
+
+  var tlr = autoDateImport.getLastRow();
+
+
+Logger.log(tlr);
+for(var i=4;i<=tlr;i++)
+  {
+    Logger.log(i);
+    
+      var klr = komoda.getLastRow();
+      var tlr = autoDateImport.getLastRow();
+      
+
+      var textFinder = komodaCode.createTextFinder(autoDateImport.getRange(i,1).getValue()).findNext();
+      var row = textFinder.getRow(); 
+      var col = textFinder.getColumn();
+      var date = autoDateImport.getRange("B2").getValue();
+      komoda.getRange(row, col+8).setValue(date);
+      Logger.log(row)
+
+  }
+
+
+  
+}
